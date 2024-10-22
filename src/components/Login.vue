@@ -6,43 +6,66 @@ import { useCookItStore } from '../store/cookItStore';
 const router = useRouter()
 const cookItStore = useCookItStore()
 
-const username = ref("admin@admin.com");
-const password = ref("admin");
+const users = [
+    {user: "admin", password: "admin", restricciones:[]},
+    {user: "vegan", password: "vegan", restricciones:["vegan"]},
+    {user: "user", password: "user", restricciones:[]},
+    {user: "gluten", password: "gluten", restricciones:["gluten"]},
+]
+
+const username = ref();
+const password = ref();
+const errorLogin = ref(false);
 const login = () => {
     try {
-        
-        if (username.value === "admin@admin.com" && password.value === "admin") {
+        const user = users.find(u => u.user == username.value && u.password == password.value);
+        if (user !== undefined) {
         cookItStore.logInUser(true)
-          router.push("/home");
-        
-    }
+        errorLogin.value = false;
+        router.push("/home");
+        } else{
+            errorLogin.value = true;
+            console.log("login failed");
+            
+        }
     } catch (error) {
 
         console.log(error)
   }
 };
 
-
 </script>
 
 <template>
 
-    <div class="loginContainer">
+    <div class="loginContainer container-md" >
         <h2>Inicia sesion</h2>
-        <form>
+        <form @submit.prevent="login" >
             <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Email</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="mail@mail.com">
+                <label for="exampleInputEmail1" class="form-label">Usuario</label>
+                <input v-model="username" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="mail@mail.com">
             </div>
             <div class="mb-3">
-                <label for="exampleInputPassword1" class="form-label">Contraseña</label>
-                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="********">
+                <label  for="exampleInputPassword1" class="form-label">Contraseña</label>
+                <input v-model="password" type="password" class="form-control" id="exampleInputPassword1" placeholder="********">
             </div>
-            
-            <button type="submit" class="btn btn-primary" @click="login()">Iniciar Sesion</button>
+            <div v-show="errorLogin" class="mb-3">
+                <p >El usuario y/o contraseña son incorrectos</p>
+            </div>
+            <button  type="submit" class="btn btn-primary" >Iniciar Sesion</button>
         </form>
     </div>
 
 </template>
 
-<style scoped></style>
+<style scoped>
+p{
+    max-width: 300px;
+    font-size: 14px;
+    color: red;
+    margin: auto;
+}
+.loginContainer{
+    min-width: 300px;
+}
+</style>
