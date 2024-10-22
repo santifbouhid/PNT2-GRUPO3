@@ -1,16 +1,24 @@
 <script setup>
 import { ref, onMounted, computed } from 'vue';
-import { useCookItStore } from '../store/cookItStore';
 import { useRouter } from 'vue-router'
+import { useCookItStore } from '../store/cookItStore';
 
-const route = useRouter()
+const router = useRouter()
+const cookItStore = useCookItStore()
 
 const username = ref("admin@admin.com");
 const password = ref("admin");
 const login = () => {
-  if (username.value === "admin@admin.com" && password.value === "admin") {
-    useCookItStore.logInUser(true)
-    router.push("/home");
+    try {
+        
+        if (username.value === "admin@admin.com" && password.value === "admin") {
+        cookItStore.logInUser(true)
+          router.push("/home");
+        
+    }
+    } catch (error) {
+
+        console.log(error)
   }
 };
 
