@@ -5,6 +5,8 @@ import { createPinia } from 'pinia'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Login from './components/Login.vue'
 import Home from './components/Home.vue'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+
 
 import { createRouter, createWebHistory } from 'vue-router';
 const routes = [
@@ -24,6 +26,7 @@ const router = createRouter({
 })
 
 createApp(App)
+.component('font-awesome-icon', FontAwesomeIcon)
 .use(createPinia())
 .use(router)
 .mount('#app')
