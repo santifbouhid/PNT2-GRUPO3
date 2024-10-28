@@ -1,6 +1,7 @@
 <script setup>
 import Header from './components/Header.vue'
 import { ref } from 'vue';
+import Footer from './components/footer.vue';
 
 let isLoggedIn = ref(true)
 </script>
@@ -8,6 +9,7 @@ let isLoggedIn = ref(true)
 <template>
     <nav class="navbar navbar-expand-lg bg-body-tertiary" v-show="isLoggedIn"><Header></Header></nav>
     <router-view></router-view>
+    <Footer />
 </template>
 
 <style scoped>
