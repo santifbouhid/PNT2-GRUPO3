@@ -2,7 +2,7 @@
 import Header from './components/Header.vue'
 import { ref } from 'vue';
 
-let isLoggedIn = ref(false)
+let isLoggedIn = ref(true)
 </script>
 
 <template>
