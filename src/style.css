@@ -77,3 +77,21 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+
+.cards {
+  padding-top: 60px;
+}
+
+
+.card img{
+  height: 200px;
+  width: auto;
+  object-fit: cover;
+}
+
+.search {
+  padding-top: 60px;
+  width: 100%;
+}
+

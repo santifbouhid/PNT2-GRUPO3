@@ -7,9 +7,15 @@ let isLoggedIn = ref(true)
 </script>
 
 <template>
+  <div class="cApp">
+
     <nav class="navbar navbar-expand-lg bg-body-tertiary" v-show="isLoggedIn"><Header></Header></nav>
-    <router-view></router-view>
-    <Footer class="footer"></Footer>
+    <div class="cuerpo">
+      <router-view></router-view>
+    </div>
+    <Footer class="fixed-bottom footer"></Footer>
+  </div>
+
 </template>
 
 <style scoped>
@@ -21,12 +27,8 @@ nav {
     padding: 0;
 }
 
-.footer{
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    left: 0;
-
+.cuerpo {
+  margin-bottom: 200px;
 }
 
 </style>

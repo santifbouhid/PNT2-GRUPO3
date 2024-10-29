@@ -22,7 +22,7 @@ const login = () => {
         if (user !== undefined) {
         cookItStore.logInUser(true)
         errorLogin.value = false;
-        router.push("/home");
+        router.push("/");
         } else{
             errorLogin.value = true;
             console.log("login failed");
@@ -31,7 +31,7 @@ const login = () => {
     } catch (error) {
 
         console.log(error)
-  }
+    }
 };
 
 </script>
