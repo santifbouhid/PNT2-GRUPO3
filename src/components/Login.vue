@@ -38,7 +38,7 @@ const login = () => {
 
 <template>
 
-    <div class="loginContainer container-md" >
+    <div class=" container-md loginContainer " >
         <h2>Inicia sesion</h2>
         <form @submit.prevent="login" >
             <div class="mb-3">
@@ -66,6 +66,7 @@ p{
     margin: auto;
 }
 .loginContainer{
-    min-width: 300px;
+    min-width: 25%;
+    max-width: 25%;
 }
 </style>

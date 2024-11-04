@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <div class="col-xl">
+  <!-- <div class="container-fluid"> -->
     <footer class="footer">
       <p>copyRights <font-awesome-icon icon="coffee" /> by Grupo-3</p>
       <ul class="footer-links">
@@ -12,7 +12,7 @@
         <li><a href="/copyrights">Copyrights</a></li>
       </ul>
     </footer>
-  </div>
+  <!-- </div> -->
 
 </template>
 

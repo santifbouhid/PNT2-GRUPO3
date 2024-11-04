@@ -4,14 +4,20 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { faKitchenSet, faUser, faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons'
 import { useCookItStore } from '../store/cookItStore';
 import { computed } from 'vue';
+import { useRouter } from 'vue-router'
 
 
+const router = useRouter()
 library.add([faKitchenSet, faUser, faArrowRightFromBracket])
 
 const cookItStore = useCookItStore()
 const logged = computed( ()=>{
   return  cookItStore.isLogged();  
 })
+
+// const toLogin = () => {
+//   router.push("/login");
+// }
 
 </script>
 
@@ -43,18 +49,15 @@ const logged = computed( ()=>{
                   icon="fa-solid fa-arrow-right-from-bracket" /></a></li>
           </ul>
         </div>
-        <!---- INGRESAR / REGISTRARSE ---->
+        <!---- INGRESAR ---->
         <div v-show="!logged">
           <ul class="navbar-nav">
             <!-- INGRESAR -->
           <li class="nav-item">
-            <a class="nav-link" href="#">Ingresar</a>
+            <RouterLink class="nav-link router-link" to="/login">
+              Ingresar
+            </RouterLink>
           </li>
-          <!-- REGISTRARSE -->
-          <li class="nav-item" >
-            <a class="nav-link" href="#">Registrarse</a>
-          </li>
-
         </ul>
         </div>
 
@@ -68,4 +71,10 @@ const logged = computed( ()=>{
 .dropdown-menu{
   left: -100px !important;
 }
+.router-link{
+  all: unset;
+  cursor: pointer;
+}
+
+
 </style>

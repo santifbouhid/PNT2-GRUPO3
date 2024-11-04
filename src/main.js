@@ -1,15 +1,19 @@
 import { createApp } from 'vue'
-import './style.css'
-import App from './App.vue'
 import { createPinia } from 'pinia'
+import './style.css'
+// BOOTSTRAP //
 import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css';
+// FONT AWESOME //
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+// ROUTER //
+import { createRouter, createWebHistory } from 'vue-router';
+// COMPONENTES //
+import App from './App.vue'
 import Login from './components/Login.vue'
 import Home from './components/Home.vue'
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import RecipeDetail from './components/RecipeDetail.vue'
 
-
-import { createRouter, createWebHistory } from 'vue-router';
 const routes = [
     {
         path: '/',
@@ -18,6 +22,10 @@ const routes = [
     {
         path: '/login',
         component: Login
+    },
+    {
+        path: '/recipe/detail',
+        component: RecipeDetail
     }
 ]
 
