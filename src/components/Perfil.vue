@@ -181,7 +181,7 @@ const countries = ref([{ name: "Afghanistan", prefix: "+93" },
 
               <div class="mb-3">
                 <label for="nombre" class="form-label">Celular</label>
-              </div
+              </div>
               <div class="row">
                 <div class="input-group mb-3">
 
