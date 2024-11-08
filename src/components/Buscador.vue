@@ -11,14 +11,9 @@ const buscarPorEtiquetas = (value) => {
 
 <template>
 
-<<<<<<< HEAD
     <div class="container-md">
       <div class="input-group">
-      <input type="text" class="form-control" aria-label="Text input with segmented dropdown button" placeholder="Ingresa una receta">
-=======
-    <div class="input-group">
       <input type="text" class="form-control" aria-label="Text input with segmented dropdown button" placeholder="Podes buscar por ingredientes, nombre o etiqueta">
->>>>>>> f745eb017060b60cb252e0e1ed88a26a423622a1
       <button type="button" class="btn btn-outline-secondary">Buscar</button>
       <button type="button" class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
         <span class="visually-hidden">Toggle Dropdown</span>
@@ -31,11 +26,9 @@ const buscarPorEtiquetas = (value) => {
         <li><a class="dropdown-item" href="#">Desestimar Restricciones</a></li>
       </ul>
     </div>
-<<<<<<< HEAD
-=======
     <div class="etiquetas">
       <span class="badge rounded-pill text-bg-dark px-4 etiqueta" v-for="tag in etiquetas" :value="tag" @click="buscarPorEtiquetas(tag)">{{tag}}</span>
->>>>>>> f745eb017060b60cb252e0e1ed88a26a423622a1
+    </div>
     </div>
 
 
