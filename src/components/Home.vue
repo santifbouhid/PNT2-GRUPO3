@@ -37,7 +37,7 @@ onBeforeMount(() => {
     <div class="cards container-lg">
       <div class="row row-cols-1 row-cols-md-2 g-4">
         <div v-for="r in primeros4"  class="col">
-          <RouterLink class=" router-link" to="/recipe/detail">
+          <RouterLink class=" router-link" :to="`/recipe/detail/${r.id}`">
             <div class="card">
               <img :src="r.image" class="card-img-top" :alt="r.name">
               <div class="card-body">
