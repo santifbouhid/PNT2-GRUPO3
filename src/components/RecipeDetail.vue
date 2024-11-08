@@ -9,11 +9,11 @@
         <!----- IMAGEN / INGREDIENTES / FICHA TÉCNICA ----->
         <div class="row my-5 px-5 align-items-center">
             <!-- IMAGEN -->
-            <div class="col">
+            <div class="col-lg-6 col-md-12 col-sm-12 pb-3" >
                 <img src="/fotosRecetas/nioquis.png" class="img-fluid" alt="..." >
             </div>
             <!----- INGREDIENTES / FICHA TÉCNICA ----->
-            <div class="col">
+            <div class="col-lg-6 col-md-12 col-sm-12">
                 <div class="row">
                     <!-- INGREDIENTES -->
                     <div class="col">
@@ -63,11 +63,7 @@
                         </div>
                     </div>
                     </div>
-                    <!-- <div class="col  gx-5">
-                        <p>
-                            
-                        </p>
-                    </div> -->
+
                 </div>
 
             </div>
@@ -97,9 +93,7 @@
 </template>
 
 <style scoped>
-.contenedor{
-    
-}
+
 .card-ing-ft{
     width: auto;
     

@@ -39,7 +39,7 @@ const login = () => {
 <template>
 
     <div class=" container-md loginContainer " >
-        <h2>Inicia sesion</h2>
+        <h2 class="titulo">Inicia sesion</h2>
         <form @submit.prevent="login" >
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Usuario</label>
@@ -68,5 +68,15 @@ p{
 .loginContainer{
     min-width: 25%;
     max-width: 25%;
+}
+.form-label{
+    font-size: 1.5rem;
+}
+.titulo{
+    font-size: 2.5rem;
+}
+
+button{
+    font-size: 1rem;
 }
 </style>

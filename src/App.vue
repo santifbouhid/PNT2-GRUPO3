@@ -37,7 +37,8 @@ let isLoggedIn = ref(true)
 }
 
 nav {
-    margin-bottom: 1rem;
+    /* margin-bottom: 1rem; */
+    min-height: 8vh;
     top: 0;
     left: 0;
     width: 100%;
@@ -46,7 +47,6 @@ nav {
 }
 
 .cuerpo{
-  position:sticky;
   width: 100%;
   margin-top: 1rem;
   margin-left: 0;

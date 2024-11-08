@@ -15,16 +15,21 @@ const logged = computed( ()=>{
   return  cookItStore.isLogged();  
 })
 
-// const toLogin = () => {
-//   router.push("/login");
-// }
+const logout = () => {
+  cookItStore.logInUser(false);
+  router.push("/");
+}
 
 </script>
 
 <template>
   <nav class="navbar navbar-expand-lg bg-body-tertiary">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#"><font-awesome-icon icon="fa-solid fa-kitchen-set" /></a>
+    <div class="container-fluid px-5">
+      <a class="navbar-brand" href="#">
+        <RouterLink class=" router-link" to="/">
+          <font-awesome-icon icon="fa-solid fa-kitchen-set" class="icon" />
+        </RouterLink>
+      </a>
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav">
           <li class="nav-item">
@@ -41,11 +46,11 @@ const logged = computed( ()=>{
         <div class="dropdown" v-show="logged">
           <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
             aria-expanded="false">
-            <font-awesome-icon icon="fa-solid fa-user" /> </a>
+            <font-awesome-icon icon="fa-solid fa-user dropdown-icon" /> </a>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="#">Mi Perfil</a></li>
             <li><a class="dropdown-item" href="#">Mis recetas</a></li>
-            <li><a class="dropdown-item" href="#">Salir <font-awesome-icon
+            <li><a class="dropdown-item" href="#" @click="logout()">Salir <font-awesome-icon
                   icon="fa-solid fa-arrow-right-from-bracket" /></a></li>
           </ul>
         </div>
@@ -68,12 +73,24 @@ const logged = computed( ()=>{
 </template>
 
 <style scoped>
+.nav-item{
+  font-size: 1.5rem;
+  
+}
+.icon{
+  height: 2.5rem;
+}
 .dropdown-menu{
   left: -100px !important;
+  
 }
 .router-link{
   all: unset;
   cursor: pointer;
+}
+.dropdown-icon{
+  height: 5rem;
+
 }
 
 
