@@ -5,6 +5,7 @@ import { ref,computed } from "vue";
 
 export const useCookItStore = defineStore('CookItStore',()=>{
     const isLoggedIn = ref(false)
+    const allRecipes = ref([])
 
     const logInUser = (estaLogeado) =>{
                
@@ -15,6 +16,15 @@ export const useCookItStore = defineStore('CookItStore',()=>{
 
     const isLogged = () => {return isLoggedIn.value}
 
-    return { logInUser, getLoggedStatus, isLogged}
+    const setAllRecipes = (recipes) => {
+        allRecipes.value = recipes
+    }
+
+    const getAllRecipes = () => { 
+        return allRecipes.value 
+    }
+
+
+    return { logInUser, getLoggedStatus, isLogged, setAllRecipes, getAllRecipes, allRecipes}
 })
 
