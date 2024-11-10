@@ -26,7 +26,7 @@ const logout = () => {
   <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid px-5">
       <a class="navbar-brand" href="#">
-        <RouterLink class=" router-link" to="/">
+        <RouterLink class="router-link" to="/">
           <font-awesome-icon icon="fa-solid fa-kitchen-set" class="icon" />
         </RouterLink>
       </a>
@@ -48,7 +48,9 @@ const logout = () => {
             aria-expanded="false">
             <font-awesome-icon icon="fa-solid fa-user dropdown-icon" /> </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Mi Perfil</a></li>
+            <RouterLink to="/perfil">
+              <li><a class="dropdown-item" href="#">Mi Perfil</a></li>
+            </RouterLink>
             <li><a class="dropdown-item" href="#">Mis recetas</a></li>
             <li><a class="dropdown-item" href="#" @click="logout()">Salir <font-awesome-icon
                   icon="fa-solid fa-arrow-right-from-bracket" /></a></li>
