@@ -48,7 +48,7 @@ export async function getGroqChatCompletion() {
       "messages": [
         {
           "role": "user",
-          "content": "Traeme una alterativa" + restriccion + " de la receta " + JSON.stringify(testReceta)
+          "content": "Traeme una alternativa" + restriccion + " de la receta " + JSON.stringify(testReceta)
         },
         {
           "role": "assistant",

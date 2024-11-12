@@ -7,7 +7,7 @@ const router = useRouter()
 const cookItStore = useCookItStore()
 
 const users = [
-    {user: "admin", password: "admin", restricciones:[]},
+    {user: "admin", password: "admin", restricciones:[], favoritos: [{id: 10, "original": true}, {id: 1, "original": false}, {id: 25, "original": true}]},
     {user: "vegan", password: "vegan", restricciones:["vegan"]},
     {user: "user", password: "user", restricciones:[]},
     {user: "gluten", password: "gluten", restricciones:["gluten"]},
@@ -20,7 +20,7 @@ const login = () => {
     try {
         const user = users.find(u => u.user == username.value && u.password == password.value);
         if (user !== undefined) {
-        cookItStore.logInUser(true)
+        cookItStore.logInUser(user, true)
         errorLogin.value = false;
         router.push("/");
         } else{

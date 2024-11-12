@@ -36,7 +36,9 @@ const logout = () => {
             <a class="nav-link" href="#">Buscar</a>
           </li>
           <li class="nav-item" v-show="logged">
-            <a class="nav-link" href="#">Mis Recetas</a>
+            <RouterLink class="router-link nav-link " to="/misrecetas">
+              Mis Recetas
+            </RouterLink>
           </li>
 
         </ul>
@@ -74,6 +76,7 @@ const logout = () => {
 
 <style scoped>
 .nav-item{
+  display: flex;
   font-size: 1.5rem;
   
 }
@@ -91,6 +94,9 @@ const logout = () => {
 .dropdown-icon{
   height: 5rem;
 
+}
+.nav-link{
+  align-content: center;
 }
 
 
