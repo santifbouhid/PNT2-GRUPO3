@@ -24,7 +24,7 @@ export const useRecetasModificadasStore = defineStore('recetasModificadasStore',
             await setAllRecipes();
         }
         return await allRecipes.value;
-        
+        w
     };
     
 

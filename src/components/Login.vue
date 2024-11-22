@@ -1,24 +1,39 @@
 <script setup>
-import { ref, onMounted, computed } from 'vue';
+import {ref, onMounted, computed, onBeforeMount} from 'vue';
 import { useRouter } from 'vue-router'
 import { useCookItStore } from '../store/cookItStore';
+import { usersCookITAPI } from "../store/usersStore.js";
+
 
 const router = useRouter()
 const cookItStore = useCookItStore()
+const usersStore = usersCookITAPI()
+let allUsers = []
 
-const users = [
-    {user: "admin", password: "admin", restricciones:[], favoritos: [{id: 10, "original": true}, {id: 1, "original": false}, {id: 25, "original": true}]},
-    {user: "vegan", password: "vegan", restricciones:["vegan"]},
-    {user: "user", password: "user", restricciones:[]},
-    {user: "gluten", password: "gluten", restricciones:["gluten"]},
-]
+
+// const users = [
+//     {user: "admin", password: "admin", restricciones:[], favoritos: [{id: 10, "original": true}, {id: 1, "original": false}, {id: 25, "original": true}]},
+//     {user: "vegan", password: "vegan", restricciones:["vegan"]},
+//     {user: "user", password: "user", restricciones:[]},
+//     {user: "gluten", password: "gluten", restricciones:["gluten"]},
+// ]
+
+
+
+const users = async () => {
+  allUsers = await usersStore.getAllUsers()
+  console.log(allUsers)
+}
+
+users()
+
 
 const username = ref();
 const password = ref();
 const errorLogin = ref(false);
 const login = () => {
     try {
-        const user = users.find(u => u.user == username.value && u.password == password.value);
+        const user = allUsers.find(u => u.username == username.value && u.pass == password.value);
         if (user !== undefined) {
         cookItStore.logInUser(user, true)
         errorLogin.value = false;

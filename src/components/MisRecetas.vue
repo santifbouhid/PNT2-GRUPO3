@@ -2,7 +2,7 @@
 // https://mockapi.io/projects/67311e517aaf2a9aff0fe0ea
 import { onBeforeMount, ref } from 'vue';
 import { useCookItStore } from '../store/cookItStore';
-import { useRecetasModificadasStore } from '../store/RecetasModificadasStore';
+import { useRecetasModificadasStore } from '../store/RecetasModificadasStore.js';
 import axios from 'axios';
 
 const cookItStore = useCookItStore()

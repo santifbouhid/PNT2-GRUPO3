@@ -1,5 +1,7 @@
 <script setup>
 import { ref } from 'vue'
+import EditPerfil from "./EditPerfil.vue";
+import AdministrarPerfil from "./AdministrarPerfil.vue";
 
 const paisSeleccionado = ref(null);
 const mostrando = ref("");
@@ -82,12 +84,6 @@ const countries = ref([{ name: "Afghanistan", prefix: "+93" },
           <li class="nav-item row">
             <a class="nav-link" id="administracion-cuenta-tab " data-bs-toggle="pill" href="#administracion-cuenta" role="tab">Administración de la cuenta</a>
           </li>
-          <li class="nav-item row">
-            <a class="nav-link" id="privacidad-tab" data-bs-toggle="pill" href="#privacidad" role="tab">Privacidad y datos</a>
-          </li>
-          <li class="nav-item row">
-            <a class="nav-link" id="seguridad-tab" data-bs-toggle="pill" href="#seguridad" role="tab">Seguridad</a>
-          </li>
         </ul>
       </div>
 
@@ -98,121 +94,14 @@ const countries = ref([{ name: "Afghanistan", prefix: "+93" },
 
           <!-- EDITAR PERFIL -->
           <div class="tab-pane fade show active" id="editar-perfil" role="tabpanel" aria-labelledby="editar-perfil-tab">
-            <div class="text-center mb-4">
-              <div class="rounded-circle bg-light d-inline-flex align-items-center justify-content-center" style="width: 100px; height: 100px; font-size: 2em;">
-                AC
-              </div>
-              <p class="text-muted">@axelchaikh</p>
-            </div>
-            <h3>Editar perfil</h3>
-            <form>
-              <div class="mb-3">
-                <label for="nombre" class="form-label">Nombre(s)</label>
-                <input type="text" class="form-control" id="nombre" value="AC">
-              </div>
-              <div class="mb-3">
-                <label for="apellidos" class="form-label">Apellidos</label>
-                <input type="text" class="form-control" id="apellidos" placeholder="Apellidos">
-              </div>
-              <div class="mb-3">
-                <label for="informacion" class="form-label">Información</label>
-                <textarea class="form-control" id="informacion" rows="2" placeholder="Cuenta tu historia"></textarea>
-              </div>
-              <div class="mb-3">
-                <label for="pronombres" class="form-label">Pronombres</label>
-                <select class="form-select" id="pronombres">
-                  <option selected>Agrega tus pronombres</option>
-                  <option value="he/him">Él</option>
-                  <option value="she/her">Ella</option>
-                  <option value="they/them">Elle</option>
-                </select>
-              </div>
-              <div class="mb-3">
-                <label for="usuario" class="form-label">Nombre de usuario</label>
-                <input type="text" class="form-control" id="usuario" value="axelchaikh">
-              </div>
-              <button id="btnGuardar" type="submit" class="btn btn-primary">Guardar</button>
-              <button id="btnRestab" type="reset" class="btn btn-secondary">Restablecer</button>
-            </form>
+            <EditPerfil></EditPerfil>
           </div>
 
           <!-- ADMINISTRACION DE LA CUENTA -->
           <div class="tab-pane fade" id="administracion-cuenta" role="tabpanel" aria-labelledby="administracion-cuenta-tab">
-            <h3>Administración de la cuenta</h3>
-            <form>
-
-              <div class="mb-3">
-                <!-- RESTRICCIONES -->
-                <div class="mb-3">
-                  <label for="restricciones" class="form-label">Restricciones</label>
-                </div>
-
-
-                <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
-                  <input type="checkbox" class="btn-check" id="btncheck1" autocomplete="off">
-                  <label class="btn btn-outline-secondary" for="btncheck1">SIN TACC</label>
-
-                  <input type="checkbox" class="btn-check" id="btncheck2" autocomplete="off">
-                  <label class="btn btn-outline-secondary" for="btncheck2">Vegetariano</label>
-
-                  <input type="checkbox" class="btn-check" id="btncheck3" autocomplete="off">
-                  <label class="btn btn-outline-secondary" for="btncheck3">Vegano</label>
-
-                  <input type="checkbox" class="btn-check" id="btncheck4" autocomplete="off">
-                  <label class="btn btn-outline-secondary" for="btncheck4">Sin Lactosa</label>
-
-                  <input type="checkbox" class="btn-check" id="btncheck5" autocomplete="off">
-                  <label class="btn btn-outline-secondary" for="btncheck5">Sibo</label>
-                </div>
-              </div>
-
-              <div class="mb-3">
-                <label for="nombre" class="form-label">Mail</label>
-                <input type="text" class="form-control" id="mail" value="example@cookit.com">
-              </div>
-
-              <div class="mb-3">
-                <label for="nombre" class="form-label">Contraseña</label>
-              </div>
-              <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="***********" aria-label="Recipient's username" aria-describedby="button-addon2">
-                <button class="btn btn-outline-secondary" type="button" id="button-addon2">Mostrar</button>
-              </div>
-
-              <div class="mb-3">
-                <label for="nombre" class="form-label">Celular</label>
-              </div>
-              <div class="row">
-                <div class="input-group mb-3">
-
-                  <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Pais</button>
-                  <select class="dropdown-menu" v-model="paisSeleccionado" size="10">
-                    <option v-for="(cod, index) in countries" :key="index" :value="cod.prefix">
-                      {{ cod.name }} ({{ cod.prefix }})
-                    </option>
-                  </select>
-
-                  <input type="text" class="form-control" placeholder="COD" aria-label="Text input with dropdown button " id="cod" @change="mostrarSeleccion" v-model="paisSeleccionado">
-                  <input type="text" class="form-control" id="num" placeholder="1122335873">
-                </div>
-              </div>
-
-              <button id="btnGuardar" type="submit" class="btn btn-primary">Guardar</button>
-            </form>
+            <AdministrarPerfil></AdministrarPerfil>
           </div>
 
-
-          <!-- PRIVACIDAD Y DATOS -->
-          <div class="tab-pane fade" id="privacidad" role="tabpanel" aria-labelledby="privacidad-tab">
-            <h3>Privacidad y datos</h3>
-            <p>Contenido de privacidad y datos...</p>
-          </div>
-
-          <!-- SEGURIDAD -->
-          <div class="tab-pane fade" id="seguridad" role="tabpanel" aria-labelledby="seguridad-tab">
-            <h3>Seguridad</h3>
-            <p>Contenido de seguridad...</p>
-          </div>
 
         </div>
       </div>
@@ -285,7 +174,7 @@ const countries = ref([{ name: "Afghanistan", prefix: "+93" },
   }
 
   .col-md-3 {
-    margin-bottom: -600px;
+    margin-bottom: -900px;
     width: 100%;
     display: flex;
     top: 20px;
@@ -294,6 +183,7 @@ const countries = ref([{ name: "Afghanistan", prefix: "+93" },
   }
 
   .col-md-9 {
+    margin-top: -200px;
     width: 100%;
     float: left;
     height: 100vh;
