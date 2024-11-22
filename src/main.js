@@ -14,6 +14,7 @@ import Login from './components/Login.vue'
 import Home from './components/Home.vue'
 import Perfil from './components/Perfil.vue'
 import RecipeDetail from './components/RecipeDetail.vue'
+import MisRecetas from './components/MisRecetas.vue';
 
 const routes = [
     {
@@ -31,6 +32,10 @@ const routes = [
     {
         path: '/perfil',
         component: Perfil
+    },
+    {
+        path: '/misrecetas',
+        component: MisRecetas
     }
 ]
 
