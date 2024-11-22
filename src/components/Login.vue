@@ -4,12 +4,10 @@ import { useRouter } from 'vue-router'
 import { useCookItStore } from '../store/cookItStore';
 import { usersCookITAPI } from "../store/usersStore.js";
 
-
 const router = useRouter()
 const cookItStore = useCookItStore()
 const usersStore = usersCookITAPI()
 let allUsers = []
-
 
 // const users = [
 //     {user: "admin", password: "admin", restricciones:[], favoritos: [{id: 10, "original": true}, {id: 1, "original": false}, {id: 25, "original": true}]},
@@ -18,21 +16,18 @@ let allUsers = []
 //     {user: "gluten", password: "gluten", restricciones:["gluten"]},
 // ]
 
-
-
 const users = async () => {
   allUsers = await usersStore.getAllUsers()
-  console.log(allUsers)
 }
-
-users()
-
-
+// EL USERNAME QUE ESCRIBE EL USUARIO
 const username = ref();
+// LA PASSWORD QUE ESCRIBE EL USUARIO
 const password = ref();
+// ERROR LOGIN SE HABILITA SI EL USUARIO PONE MAL EL USERNAME Y/O LA PASSWORD
 const errorLogin = ref(false);
+
 const login = () => {
-    try {
+    try {       
         const user = allUsers.find(u => u.username == username.value && u.pass == password.value);
         if (user !== undefined) {
         cookItStore.logInUser(user, true)
@@ -40,14 +35,18 @@ const login = () => {
         router.push("/");
         } else{
             errorLogin.value = true;
-            console.log("login failed");
+            console.error("login failed");
             
         }
     } catch (error) {
 
-        console.log(error)
+        console.error(error)
     }
 };
+
+onBeforeMount(() => {
+    users()
+})
 
 </script>
 
