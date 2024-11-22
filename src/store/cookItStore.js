@@ -6,11 +6,10 @@ import { ref,computed } from "vue";
 export const useCookItStore = defineStore('CookItStore',()=>{
     const isLoggedIn = ref(false)
     const allRecipes = ref([])
+    const etiqueta = ref('')
 
     const logInUser = (estaLogeado) =>{
-               
         isLoggedIn.value = estaLogeado
-        console.log("login! ", isLoggedIn.value)
     }
     const getLoggedStatus = computed(() => isLoggedIn.value)
 
@@ -20,11 +19,21 @@ export const useCookItStore = defineStore('CookItStore',()=>{
         allRecipes.value = recipes
     }
 
-    const getAllRecipes = () => { 
-        return allRecipes.value 
+    const getAllRecipes = async () => { 
+        const data = await fetch('https://cookit-api.up.railway.app/recipes/allRecipes')
+        const r = await data.json()
+        return allRecipes.value = r;
+        //console.log(allRecipes.value)
     }
 
+    const setEtiqueta = (tag) => {
+        etiqueta.value = tag
+    }
 
-    return { logInUser, getLoggedStatus, isLogged, setAllRecipes, getAllRecipes, allRecipes}
+    const getEtiqueta = () => {
+        return etiqueta.value
+    }
+
+    return { logInUser, getLoggedStatus, isLogged, setAllRecipes, getAllRecipes, allRecipes, setEtiqueta, getEtiqueta, etiqueta}
 })
 

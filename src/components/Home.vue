@@ -1,23 +1,20 @@
 <script setup>
 import Buscador from "./Buscador.vue";
-import {onBeforeMount, computed, ref } from "vue";
+import {onBeforeMount, computed, ref, onMounted } from "vue";
 import { useCookItStore } from "../store/cookItStore.js";
+import GroqIA from "./GroqIA.vue"
+// const cookItStore = useCookItStore()
+// const recipes = ref([])
 
-const cookItStore = useCookItStore()
-const recipes = ref([])
-
-const getRecipes = async () => {
-  const data = await fetch('https://www.mockachino.com/770e676d-e81c-40/recetas')
-
-  const r = await data.json()
-
-  recipes.value = await r.recipes;
-  cookItStore.setAllRecipes(recipes.value)
-}
-
-onBeforeMount(() => {
-  getRecipes();
-});
+// const getRecipes = async () => {
+//   const allRecipes = await cookItStore.getAllRecipes()
+//   console.log(allRecipes)
+// }
+// onMounted(() => {
+//   getRecipes()
+// })
+onMounted(() => {
+})
 
 </script>
 
