@@ -1,7 +1,9 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue';
 import { useCookItStore } from '../store/cookItStore.js';
-import GroqIA from './GroqIA.vue'
+import { pedirReceta } from '../services/cohereIA.service.js';
+
+//const _cohereIAService = new cohereIAService()
 
 let recetas = []
 const cookItStore = useCookItStore()
@@ -74,7 +76,23 @@ const buscar = async () => {
     }
   }
 
+  if (resultados.value.length === 0){
+    resultados.value = await buscarRecetaIA()
+    //console.log("resultados.value: ",resultados.value)
+  }
 }
+
+const buscarRecetaIA = async() => {
+  const rest = restriccion.value === 'gf' ? "gluten free" : restriccion.value
+  const prompt = restriccion.value == '' ? `Necesito una receta de ${busqueda.value}` : `Necesito una receta de ${busqueda.value} que sea apto ${rest}`
+  const respuesta = await pedirReceta(prompt)
+  const respJson = JSON.parse(respuesta)
+  respJson.image = null
+  console.log(respJson)
+  const array = []
+  array.push(respJson)
+  return array
+ }
 
 const buscarPorRestriccion = async(restriccion) => {
   let busqPorRest = await fetch(`https://cookit-api.up.railway.app/recipes/byRestrictions/${restriccion}`)
@@ -166,7 +184,8 @@ onMounted(() => {
           <div v-for="r in resultados" class="col">
             <RouterLink class=" router-link" :to="`/recipe/detail/${r._id}`">
               <div class="card">
-                <img :src="r.image" class="card-img-top" :alt="r.name">
+                <img v-if="r.image == null" src='../assets/foto-stock.jpg' class="card-img-top" :alt="r.name">
+                <img v-else :src=r.image class="card-img-top" :alt="r.name">
                 <div class="card-body">
                   <h5 class="card-title">{{ r.name }}</h5>
                   <p class="card-text">{{ `${r.difficulty}, ${r.prepTimeMinutes} minutos, ${r.servings} porciones` }}</p>
