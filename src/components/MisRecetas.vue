@@ -4,7 +4,6 @@ import { onBeforeMount, ref } from 'vue';
 import { useCookItStore } from '../store/cookItStore';
 import { useRecetasModificadasStore } from '../store/RecetasModificadasStore.js';
 import { useRecetasStore } from '../store/recetasStore.js';
-import Login from './Login.vue';
 import axios from 'axios';
 
 const cookItStore = useCookItStore()
@@ -22,7 +21,6 @@ const getRecipesHome = async () => {
   let r;
   // const data = await axios.get('https://www.mockachino.com/770e676d-e81c-40/recetas').then(resp => r = resp.data)
   const data = await axios.get('https://cookit-api.up.railway.app/recipes/allRecipes').then(resp => r = resp.data)
-  console.log('getRecipesHome',r);
   return r;
 }
 
@@ -30,26 +28,20 @@ const getRecipesHome = async () => {
 const getAllRecipes = async () => {
  
   const userFavoritos = await cookItStore.getUserLogged().recetasFavoritas; 
-  console.log(userFavoritos); 
   let recetas = [];
   // Esto se hace porque necesito el array de las recetas originales. Lo mejor seria que este en recetasStore.
   if (recetasOriginales.value.length == 0){
     recetasOriginales.value = await getRecipesHome()
     // recetasOriginales.value = await recetasStore.getAllRecipes();
-    console.log('AAAAAAAAAAAAAAA', recetasOriginales.value[0]._id);
-    
   }
   
   for (let i = 0; i < userFavoritos.length; i++) {
     const fav = userFavoritos[i];
     if (fav.original === true){
-      console.log('fav.id ',fav.id);
       let recetaEncontrada = recetasOriginales.value.find(a => a._id == fav.id)
-      console.log('recetaEncontrada', recetaEncontrada);
-      recetas.push(recetaEncontrada);
+      recetaEncontrada !== undefined? recetas.push(recetaEncontrada) : null;
     } else{
       let recetaEncontrada = await recetasModificadasStore.getAllRecipes().then(e=>e.find(a => a.id == fav.id));
-      console.log('recetaEncontrada REPE', recetaEncontrada);
       recetas.push(recetaEncontrada.receta);
     }
     
