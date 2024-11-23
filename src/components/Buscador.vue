@@ -10,11 +10,18 @@ const etiquetas = ref(["Italiana", "Asiática", "Postre", "Ensalada", "Cóctel"]
 const resultados = ref([])
 const busqueda = ref('')
 const restriccion = ref('')
+const checked = ref(false)
+const user = ref(cookItStore.getUserLogged())
+
 const allRecipes = async() => {
   recetas = await cookItStore.getAllRecipes()
 }
 
 allRecipes()
+
+const logged = computed( ()=>{
+  return  cookItStore.isLogged();  
+})
 
 const setPrimerResultado = async () => {
   if (sinBusqueda.value == true){
@@ -96,14 +103,21 @@ const getRestriccion = computed(() => {
 const contador = computed(() => {
   return resultados.value.length
 })
-
-const convertir = async() => {
-  GroqIA.getGroqChatCompletion('gluten free', recetas[0])
+const respetarRestriccion = async() => {
+  if(checked.value == false){
+    checked.value = true
+    setRestriccion(cookItStore.getUserRestrictions()[0])
+  } else {
+    checked.value = false
+    setRestriccion('')
+  }
 }
+// const convertir = async() => {
+//   GroqIA.getGroqChatCompletion('gluten free', recetas[0])
+// }
 
 onMounted(() => {
   setPrimerResultado()
-  convertir()
 })
 
 </script>
@@ -114,7 +128,6 @@ onMounted(() => {
     <div class="input-group">
       <input type="text" class="form-control" aria-label="Text input with segmented dropdown button"
         placeholder="Podes buscar por ingredientes, nombre o etiqueta" v-model="busqueda">
-        <span class="badge rounded-pill text-bg-success px-4 etiqueta" v-if="getRestriccion!=''">{{getRestriccion}}</span>
       <button type="button" class="btn btn-outline-secondary" @click="buscar()">Buscar</button>
       <button type="button" class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split"
         data-bs-toggle="dropdown" aria-expanded="false">
@@ -130,10 +143,18 @@ onMounted(() => {
         <li><a class="dropdown-item" href="#" @click="setRestriccion('')">Desestimar Restricciones</a></li>
       </ul>
     </div>
+    <div class="respetarRest" v-if="logged">
+      <input type="checkbox" name="respetarRestriccion" id="respetarRestriccion" v-model="checked" @click="respetarRestriccion()">Respetar las restricciones de mi perfil
+    </div>
     <div class="etiquetas">
-      <span class="badge rounded-pill text-bg-dark px-4 etiqueta" v-for="tag in etiquetas" :value="tag"
-        @click="mostrarResEtiquetas(tag)">{{tag}}</span>
-      <span class="badge rounded-pill text-bg-danger px-4 etiqueta" @click="eliminarFiltros()">Eliminar filtros</span>
+      <div class="pillEtiquetas">
+        <span class="badge rounded-pill text-bg-dark px-4 etiqueta" v-for="tag in etiquetas" :value="tag"
+          @click="mostrarResEtiquetas(tag)">{{tag}}</span>
+        <span class="badge rounded-pill text-bg-danger px-4 etiqueta" @click="eliminarFiltros()">Eliminar filtros</span>
+      </div>
+      <div class="restriccion">
+        <span class="badge rounded-pill text-bg-success px-4 etiqueta" v-if="getRestriccion!=''">{{getRestriccion}}</span>
+      </div>
     </div>
   </div>
 
@@ -143,7 +164,7 @@ onMounted(() => {
       <div class="cards container-lg">
         <div class="row row-cols-1 row-cols-md-2 g-4">
           <div v-for="r in resultados" class="col">
-            <RouterLink class=" router-link" :to="`/recipe/detail/${r.id}`">
+            <RouterLink class=" router-link" :to="`/recipe/detail/${r._id}`">
               <div class="card">
                 <img :src="r.image" class="card-img-top" :alt="r.name">
                 <div class="card-body">
@@ -163,10 +184,35 @@ onMounted(() => {
 </template>
 
 <style scoped>
-.etiqueta{
-  margin: 15px;
-  cursor: pointer;
-  font-size: 1rem;
-  font-weight: 500;
+.etiquetas{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  
+  .etiqueta {
+    margin: 15px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+  }
 }
+
+.respetarRest{
+  padding: 2vh 1vw 0.5vh;
+  #respetarRestriccion{
+    margin-right: 0.5vw;
+  }
+}
+
+.resultados {
+  .counter {
+    margin-left: 16vw;
+    padding-top: 10px;
+  }
+
+  .cards{
+    padding-top: 25px !important;
+  }
+}
+
 </style>
