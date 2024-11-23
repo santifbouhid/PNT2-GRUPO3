@@ -1,5 +1,5 @@
 <script setup>
-import {ref, onMounted, computed, onBeforeMount} from 'vue';
+import {ref, onBeforeMount} from 'vue';
 import { useRouter } from 'vue-router'
 import { useCookItStore } from '../store/cookItStore';
 import { usersCookITAPI } from "../store/usersStore.js";
@@ -9,16 +9,17 @@ const cookItStore = useCookItStore()
 const usersStore = usersCookITAPI()
 let allUsers = []
 
-// const users = [
-//     {user: "admin", password: "admin", restricciones:[], favoritos: [{id: 10, "original": true}, {id: 1, "original": false}, {id: 25, "original": true}]},
-//     {user: "vegan", password: "vegan", restricciones:["vegan"]},
-//     {user: "user", password: "user", restricciones:[]},
-//     {user: "gluten", password: "gluten", restricciones:["gluten"]},
-// ]
+allUsers = [
+    {username: "admin", pass: "admin", restricciones:[], recetasFavoritas: [{id: "6733b5239bee9ca353f3cd4f", "original": true}, {id: 1, "original": false}, {id: "6733b5239bee9ca353f3cd4c", "original": true}]},
+    {user: "vegan", password: "vegan", restricciones:["vegan"]},
+    {user: "user", password: "user", restricciones:[]},
+    {user: "gluten", password: "gluten", restricciones:["gluten"]},
+]
 
-const users = async () => {
-  allUsers = await usersStore.getAllUsers()
-}
+// const users = async () => {
+//   allUsers = await usersStore.getAllUsers()
+// }
+
 // EL USERNAME QUE ESCRIBE EL USUARIO
 const username = ref();
 // LA PASSWORD QUE ESCRIBE EL USUARIO
@@ -44,9 +45,9 @@ const login = () => {
     }
 };
 
-onBeforeMount(() => {
-    users()
-})
+// onBeforeMount(() => {
+//     users()
+// })
 
 </script>
 

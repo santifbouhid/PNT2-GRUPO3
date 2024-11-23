@@ -7,6 +7,8 @@ export const usersCookITAPI = defineStore('usersStore',() => {
     const users = ref([])
 
     const traerUsersCookIT = async () => {
+        // const data = await axios.get('https://cookit-api.up.railway.app/users/users')
+        //.then(r => users.value = r.data);
         const data = await axios.get('https://cookit-api.up.railway.app/users/users', {
             params: {
               role: 'admin'
@@ -19,7 +21,7 @@ export const usersCookITAPI = defineStore('usersStore',() => {
 
     const getAllUsers = async () => {
         if (users.value.length === 0){
-            const res = await traerUsersCookIT()
+            const res = await traerUsersCookIT()         
             return res
         }
             return await users.value;
