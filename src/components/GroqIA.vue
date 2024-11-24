@@ -71,6 +71,8 @@ export async function getGroqChatCompletion(restriccion, receta) {
       "stop": "```"
     }).then();
     //res => console.log(res.choices[0].message.content)
+   
+    // .then(res => console.log(res.choices[0].message.content));
   //});
 }
 

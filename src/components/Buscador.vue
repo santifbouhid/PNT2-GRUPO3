@@ -76,6 +76,7 @@ const buscarRecetaIA = async() => {
   const respuesta = await pedirReceta(prompt)
   const respJson = JSON.parse(respuesta)
   respJson.image = null
+  // console.log(respJson)
   const array = []
   const nuevaReceta = await recetasStore.guardarNuevaReceta(respJson)
   if(nuevaReceta.acknowledged === true){

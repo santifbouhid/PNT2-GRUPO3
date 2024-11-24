@@ -7,7 +7,7 @@ const recipeId = ref(route.params.id);
 const recetaAMostrar = ref()
 const recetaJSONGif = ref()
 
-console.log(recipeId.value);
+// console.log(recipeId.value);
 
 
 
@@ -17,7 +17,7 @@ const traerPorID = async(id) => {
     let recetaJSON = await recetaBuscada.json()
     recetaAMostrar.value = recetaJSON.recipe;
     recetaJSONGif.value = recetaJSON.gif
-    await console.log(recetaAMostrar.value.name)
+    // await console.log(recetaAMostrar.value.name)
   }catch {
     console.error("Error al mostrar la receta:", error);
   }
