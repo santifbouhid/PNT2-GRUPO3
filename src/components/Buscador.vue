@@ -130,9 +130,6 @@ const respetarRestriccion = async() => {
     setRestriccion('')
   }
 }
-// const convertir = async() => {
-//   GroqIA.getGroqChatCompletion('gluten free', recetas[0])
-// }
 
 onMounted(() => {
   setPrimerResultado()
@@ -145,7 +142,7 @@ onMounted(() => {
   <div class="container-md">
     <div class="input-group">
       <input type="text" class="form-control" aria-label="Text input with segmented dropdown button"
-        placeholder="Podes buscar por ingredientes, nombre o etiqueta" v-model="busqueda">
+        placeholder="Podes buscar por ingredientes, nombre o etiqueta" v-model="busqueda" @keyup.enter="buscar()">
       <button type="button" class="btn btn-outline-secondary" @click="buscar()">Buscar</button>
       <button type="button" class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split"
         data-bs-toggle="dropdown" aria-expanded="false">
@@ -187,8 +184,15 @@ onMounted(() => {
                 <img v-if="r.image == null" src='../assets/foto-stock.jpg' class="card-img-top" :alt="r.name">
                 <img v-else :src=r.image class="card-img-top" :alt="r.name">
                 <div class="card-body">
-                  <h5 class="card-title">{{ r.name }}</h5>
-                  <p class="card-text">{{ `${r.difficulty}, ${r.prepTimeMinutes} minutos, ${r.servings} porciones` }}</p>
+                  <div class="content">
+                    <h5 class="card-title">{{ r.name }}</h5>
+                    <p class="card-text">{{ `${r.difficulty}, ${r.prepTimeMinutes} minutos, ${r.servings} porciones` }}</p>
+                  </div>
+                  <div class="sellos">
+                    <img v-if="r.apto.includes('gf')" src="https://img.freepik.com/premium-vector/vector-gluten-free-icon-vector-vector-icon-gluten-free-label_606304-747.jpg" alt="glutenfree">
+                    <img class="veggie" v-if="r.apto.includes('veggie')" src="https://static.vecteezy.com/system/resources/previews/046/930/751/non_2x/vegetarian-icon-vegetarian-certified-label-eco-illustration-for-product-packaging-logo-sign-symbol-or-emblem-vector.jpg" alt="vegetariano">
+                    <img v-if="r.apto.includes('vegan')" src="https://static.vecteezy.com/system/resources/previews/023/959/764/non_2x/vegan-icon-logo-isolated-on-white-background-vector.jpg" alt="vegano">
+                  </div>
                 </div>
               </div>
             </RouterLink>
@@ -225,12 +229,32 @@ onMounted(() => {
 
 .resultados {
   .counter {
-    margin-left: 16vw;
+    margin-left: 5vw;
     padding-top: 10px;
   }
 
   .cards{
     padding-top: 25px !important;
+    .card-body{
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+
+      .sellos {
+        display: flex;
+        flex-direction: row;
+
+        img {
+          width: auto;
+          height: 40px;
+
+        }
+        .veggie {
+          padding: 5px;
+          box-sizing: border-box;
+        }
+      }
+    }
   }
 }
 

@@ -41,7 +41,22 @@ export const useCookItStore = defineStore('CookItStore',()=>{
 
     const getUserRestrictions = () => userLogged.value.restricciones
 
+    const updateUserLoggedRestricciones = async (id, info) => {
+        const data = await fetch(`https://cookit-api.up.railway.app/users/update/restrictions/${id}`, {
+            method: 'PATCH',
+            headers: {
+                'accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: {
+                "restricciones": info
+            },
+        })
+        console.log(data)
+    }
 
-    return { getUserLogged, logInUser, getLoggedStatus, isLogged, setAllRecipes, getAllRecipes, allRecipes, getRecipeById, recipeById, getUserRestrictions}
+
+
+    return { getUserLogged, logInUser, getLoggedStatus, isLogged, setAllRecipes, getAllRecipes, allRecipes, getRecipeById, recipeById, getUserRestrictions, userLogged, updateUserLoggedRestricciones}
 })
 
