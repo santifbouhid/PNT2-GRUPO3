@@ -88,7 +88,7 @@ const buscarRecetaIA = async() => {
   const respuesta = await pedirReceta(prompt)
   const respJson = JSON.parse(respuesta)
   respJson.image = null
-  console.log(respJson)
+  // console.log(respJson)
   const array = []
   array.push(respJson)
   return array

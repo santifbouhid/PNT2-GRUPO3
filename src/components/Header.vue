@@ -1,14 +1,14 @@
 <script setup>
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { faKitchenSet, faUser, faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons'
+// import { library } from '@fortawesome/fontawesome-svg-core';
+// import { faKitchenSet, faUser, faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons'
 import { useCookItStore } from '../store/cookItStore';
 import { computed } from 'vue';
 import { useRouter } from 'vue-router'
 
 
 const router = useRouter()
-library.add([faKitchenSet, faUser, faArrowRightFromBracket])
+// library.add([faKitchenSet, faUser, faArrowRightFromBracket])
 
 const cookItStore = useCookItStore()
 const logged = computed( ()=>{

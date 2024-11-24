@@ -134,10 +134,10 @@ import { CohereClientV2 } from 'cohere-ai';
                 model: "command-r-08-2024",
             });
     
-            console.log("Receta adaptada:", response.message.content[0].text);
+            // console.log("Receta adaptada:", response.message.content[0].text);
             return response.text;
         } catch (error) {
-            console.error("Error durante la llamada a Cohere API:", error);
+            // console.error("Error durante la llamada a Cohere API:", error);
         }
     };
     

@@ -69,7 +69,8 @@ export async function getGroqChatCompletion(restriccion, receta) {
       ],
       "model": "llama3-70b-8192",
       "stop": "```"
-    }).then(res => console.log(res.choices[0].message.content));
+    })
+    // .then(res => console.log(res.choices[0].message.content));
   //});
 }
 

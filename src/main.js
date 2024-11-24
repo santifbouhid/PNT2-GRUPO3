@@ -6,6 +6,10 @@ import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css';
 // FONT AWESOME //
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faKitchenSet, faUser, faArrowRightFromBracket, faHeart as fasHeart, faCoffee } from '@fortawesome/free-solid-svg-icons'
+import { faHeart as farHeart} from '@fortawesome/free-regular-svg-icons';
+library.add([faKitchenSet, faUser, faArrowRightFromBracket, farHeart, fasHeart, faCoffee ])
 // ROUTER //
 import { createRouter, createWebHistory } from 'vue-router';
 // COMPONENTES //
