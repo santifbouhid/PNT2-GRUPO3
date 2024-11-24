@@ -1,17 +1,17 @@
 <script setup>
-import { ref, computed, onMounted } from 'vue';
+import { ref, computed, onMounted, onBeforeMount } from 'vue';
 import { useCookItStore } from '../store/cookItStore.js';
 import { pedirReceta } from '../services/cohereIA.service.js';
-
-//const _cohereIAService = new cohereIAService()
+import { useRecetasStore } from '../store/recetasStore.js'
 
 let recetas = []
 const cookItStore = useCookItStore()
+const recetasStore = useRecetasStore()
 const sinBusqueda = ref(true)
 const etiquetas = ref(["Italiana", "Asiática", "Postre", "Ensalada", "Cóctel"])
 const resultados = ref([])
 const busqueda = ref('')
-const restriccion = ref('')
+const restriccion = ref([])
 const checked = ref(false)
 const user = ref(cookItStore.getUserLogged())
 
@@ -24,12 +24,6 @@ allRecipes()
 const logged = computed( ()=>{
   return  cookItStore.isLogged();  
 })
-
-const setPrimerResultado = async () => {
-  if (sinBusqueda.value == true){
-    resultados.value = primeros4(recetas)
-  }
-}
 
 const buscarPorEtiquetas = (etiqueta) => {
   sinBusqueda.value = false;
@@ -50,18 +44,14 @@ const mostrarResEtiquetas = (etiqueta) => {
   resultados.value = buscarPorEtiquetas(etiqueta)
 }
 
-const primeros4 = (array) => {
-  return array.slice(0, 4).filter(recipe => recipe);
-}
-
 const eliminarFiltros = () => {
   resultados.value = recetas
 }
 
 const buscar = async () => {
-   if (busqueda.value == '' && restriccion.value == ''){
+   if (busqueda.value == '' && restriccion.value.length === 0){
     resultados.value = recetas
-  } else if (busqueda.value === '' && restriccion.value != ''){
+  } else if (busqueda.value === '' && restriccion.value.length > 0){
     resultados.value = await buscarPorRestriccion(restriccion.value)
   } else {
     let busqPorIng = await fetch(`https://cookit-api.up.railway.app/recipes/byIngredient/${busqueda.value}`)
@@ -78,30 +68,43 @@ const buscar = async () => {
 
   if (resultados.value.length === 0){
     resultados.value = await buscarRecetaIA()
-    //console.log("resultados.value: ",resultados.value)
   }
 }
 
 const buscarRecetaIA = async() => {
-  const rest = restriccion.value === 'gf' ? "gluten free" : restriccion.value
-  const prompt = restriccion.value == '' ? `Necesito una receta de ${busqueda.value}` : `Necesito una receta de ${busqueda.value} que sea apto ${rest}`
+  const prompt = restriccion.value.length === 0 ? `Necesito una receta de ${busqueda.value}` : `Necesito una receta de ${busqueda.value} que sea apto ${restriccion.value.join(' ')}`
   const respuesta = await pedirReceta(prompt)
   const respJson = JSON.parse(respuesta)
   respJson.image = null
-  console.log(respJson)
   const array = []
-  array.push(respJson)
+  const nuevaReceta = await recetasStore.guardarNuevaReceta(respJson)
+  if(nuevaReceta.acknowledged === true){
+    //actualizo la lista de todas las recetas
+    await allRecipes()
+    const traerReceta = await cookItStore.getRecipeById(nuevaReceta.insertedId)
+    array.push(traerReceta.recipe)
+  }
   return array
  }
 
-const buscarPorRestriccion = async(restriccion) => {
-  let busqPorRest = await fetch(`https://cookit-api.up.railway.app/recipes/byRestrictions/${restriccion}`)
-  let resultados = await busqPorRest.json()
+const buscarPorRestriccion = async(rest) => {
+  let resultados = []
+  recetas.forEach(receta =>{
+    if(rest.every(r => receta.apto.includes(r)) == true){
+      resultados.push(receta)
+    }
+  })
   return resultados;
 }
 
+const setRestriccionMultiple = (rest) =>{
+  rest.forEach(item => {
+    restriccion.value.push(item);
+  })
+}
+
 const setRestriccion = (rest) =>{
-  restriccion.value = rest;
+    restriccion.value.push(rest);
 }
 
 const filtrarPorRestriccion = (array) =>{
@@ -114,8 +117,8 @@ const filtrarPorRestriccion = (array) =>{
   return filtradoRest;
 }
 
-const getRestriccion = computed(() => {
-  return restriccion.value
+const getRestricciones = computed(() => {
+  return restriccion.value.length
 })
 
 const contador = computed(() => {
@@ -124,16 +127,14 @@ const contador = computed(() => {
 const respetarRestriccion = async() => {
   if(checked.value == false){
     checked.value = true
-    setRestriccion(cookItStore.getUserRestrictions()[0])
+    setRestriccionMultiple(cookItStore.getUserRestrictions())
   } else {
     checked.value = false
-    setRestriccion('')
+    restriccion.value.splice(0, restriccion.value.length)
   }
 }
 
-onMounted(() => {
-  setPrimerResultado()
-})
+
 
 </script>
 
@@ -167,8 +168,8 @@ onMounted(() => {
           @click="mostrarResEtiquetas(tag)">{{tag}}</span>
         <span class="badge rounded-pill text-bg-danger px-4 etiqueta" @click="eliminarFiltros()">Eliminar filtros</span>
       </div>
-      <div class="restriccion">
-        <span class="badge rounded-pill text-bg-success px-4 etiqueta" v-if="getRestriccion!=''">{{getRestriccion}}</span>
+      <div class="restriccion" v-if="getRestricciones > 0">
+        <span v-for="rest in restriccion" class="badge rounded-pill text-bg-success px-4 etiqueta">{{ rest }}</span>
       </div>
     </div>
   </div>

@@ -16,7 +16,6 @@ export const useRecetasStore = defineStore('recetasStore',() => {
             // return data.data;
             const data = await axios.get('https://cookit-api.up.railway.app/recipes/allRecipes')         
           .then(r => allRecipes.value = r.data);
-          console.log('SET ALL RECIPES STORE', data);
           return data;
           } catch (error) {
           console.error("Error en setAllRecipes - recetasModifStore:", error);
@@ -25,7 +24,6 @@ export const useRecetasStore = defineStore('recetasStore',() => {
 
     const getAllRecipes =  async () => {
         // Si todavia no se trajeron las recetas, las trae.
-        console.log('getAllRecipes STORE');
         if (allRecipes.value.length === 0){
           const res = await setAllRecipes()   
           return res
@@ -34,9 +32,30 @@ export const useRecetasStore = defineStore('recetasStore',() => {
           return await allRecipes.value;
         
     };
+
+    const guardarNuevaReceta = async(receta) => {
+      try {
+            const response = await fetch("https://cookit-api.up.railway.app/recipes/newRecipe", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                "role": "admin"
+              },
+              body: JSON.stringify(receta),
+            });
+    
+            if (!response.ok) {
+              throw new Error(`Error: ${response.status}`);
+            }
+            const data = await response.json();
+            return data
+          } catch (error) {
+            console.error("Error al enviar datos:", error);
+          }
+        };
     
 
-    return {getAllRecipes};
+    return {getAllRecipes, guardarNuevaReceta};
   }
 );
 

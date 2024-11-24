@@ -33,7 +33,9 @@ const logout = () => {
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link" href="#">Buscar</a>
+            <RouterLink class="router-link" to="/">
+              <a class="nav-link" href="#">Buscar</a>
+            </RouterLink>
           </li>
           <li class="nav-item" v-show="logged">
             <RouterLink class="router-link nav-link " to="/misrecetas">

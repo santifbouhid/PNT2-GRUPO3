@@ -14,7 +14,7 @@ import { CohereClientV2 } from 'cohere-ai';
             },
             {
                 role: "user",
-                content: `${recipe}\nPor favor, completa la siguiente estructura JSON con los detalles de la receta:\n Para el campo "apto" en el template del JSON, solo podes incluir valores de la siguiente lista, si y solo si las recetas son aptas en relacion a los valores: "veggie", "vegan", "gluten-free". \n\n{\n  \"_id\": \"\",\n  \"name\": \"\",\n  \"ingredients\": [],\n  \"instructions\": [],\n  \"prepTimeMinutes\": null,\n  \"cookTimeMinutes\": null,\n  \"servings\": null,\n  \"difficulty\": \"\",\n  \"cuisine\": \"\",\n  \"caloriesPerServing\": null,\n  \"tags\": [],\n  \"userId\": null,\n  \"image\": \"\",\n  \"rating\": null,\n  \"reviewCount\": null,\n  \"mealType\": [],\n  \"apto\": []\n}`,
+                content: `${recipe}\nPor favor, completa la siguiente estructura JSON con los detalles de la receta:\n Para el campo "apto" en el template del JSON, solo podes incluir valores de la siguiente lista, si y solo si las recetas son aptas en relacion a los valores: "veggie", "vegan", "gf". \n\n{\n  \"name\": \"\",\n  \"ingredients\": [],\n  \"instructions\": [],\n  \"prepTimeMinutes\": null,\n  \"cookTimeMinutes\": null,\n  \"servings\": null,\n  \"difficulty\": \"\",\n  \"cuisine\": \"\",\n  \"caloriesPerServing\": null,\n  \"tags\": [],\n  \"userId\": null,\n  \"image\": \"\",\n  \"rating\": null,\n  \"reviewCount\": null,\n  \"mealType\": [],\n  \"apto\": []\n}`,
             },
         ];
     
@@ -134,7 +134,7 @@ import { CohereClientV2 } from 'cohere-ai';
                 model: "command-r-08-2024",
             });
     
-            console.log("Receta adaptada:", response.message.content[0].text);
+            //console.log("Receta adaptada:", response.message.content[0].text);
             return response.text;
         } catch (error) {
             console.error("Error durante la llamada a Cohere API:", error);
