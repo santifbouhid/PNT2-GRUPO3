@@ -39,7 +39,8 @@ onBeforeMount(() => {
         <div class="row my-5 px-5 align-items-center" id="objetos">
             <!-- IMAGEN -->
             <div class="col-lg-6 col-md-12 col-sm-12 pb-3" >
-                <img :src="`${recetaAMostrar.image}`" class="img-fluid" :alt="`${recetaAMostrar.name}`"  >
+                <img v-if="recetaAMostrar.image == null" src='../assets/foto-stock.jpg' class="card-img-top" :alt="recetaAMostrar.name">
+                <img v-else :src="`${recetaAMostrar.image}`" class="img-fluid" :alt="`${recetaAMostrar.name}`"  >
             </div>
             <!----- INGREDIENTES / FICHA TÉCNICA ----->
             <div class="col-lg-6 col-md-12 col-sm-12">
