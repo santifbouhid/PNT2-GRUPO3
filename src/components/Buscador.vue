@@ -178,7 +178,6 @@ const respetarRestriccion = async() => {
       </div>
     </div>
   </div>
-
   <div class="resultados">
     <div>
       <div class="counter" v-if="contador > 0">{{ contador }} recetas encontradas</div>

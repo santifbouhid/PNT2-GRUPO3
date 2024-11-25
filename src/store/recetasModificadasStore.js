@@ -30,9 +30,7 @@ export const useRecetasModificadasStore = defineStore('recetasModificadasStore',
     const getIdUltimaRecetaModificada = async() => {
       if(allRecipes.value.length === 0){
         setAllRecipes()
-      } else {
-        //const todasLasRecetas = 
-      }
+      } 
     }
 
     const saveRecetaModificada = async(receta) => {
@@ -49,8 +47,6 @@ export const useRecetasModificadasStore = defineStore('recetasModificadasStore',
           throw new Error(`Error: ${response.status}`);
         }
         console.log(response)
-        // const data = await response.json();
-        // return data
       } catch (error) {
         console.error("Error al enviar datos:", error);
       }

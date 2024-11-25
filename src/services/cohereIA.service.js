@@ -23,126 +23,14 @@ import { CohereClientV2 } from 'cohere-ai';
                 messages,
                 model: "command-r-08-2024",
             });
-    
-            //console.log(JSON.stringify(response, null, 2));
-    
             let respuesta = response.message.content[0].text
-    
-    
-            //console.log(respuesta)
             return respuesta;
         } catch (error) {
             console.error("Error during Cohere API call:", error);
         }
     };
     
-    let respuesta =  pedirReceta();
-    
-    
-    const estructuraJSON = {
-        "_id": "",
-        "name": "",
-        "ingredients": [],
-        "instructions": [],
-        "prepTimeMinutes": null,
-        "cookTimeMinutes": null,
-        "servings": null,
-        "difficulty": "",
-        "cuisine": "",
-        "caloriesPerServing": null,
-        "tags": [],
-        "userId": null,
-        "image": "",
-        "rating": null,
-        "reviewCount": null,
-        "mealType": [],
-        "apto": []
-    }
-    
-    
-    
-    const respuestaPars = {
-        "_id": "empanadas-de-carne",
-        "name": "Empanadas de Carne Jugosas",
-        "ingredients": [
-            "500 gramos de carne molida de res",
-            "1 cebolla grande picada",
-            "2 dientes de ajo picados",
-            "1 pimiento rojo pequeño picado",
-            "1 taza de guisantes congelados",
-            "1/2 taza de pasas",
-            "1 cucharadita de comino molido",
-            "1/2 cucharadita de pimentón dulce",
-            "Sal y pimienta al gusto",
-            "3 tazas de harina de trigo",
-            "1 cucharadita de sal",
-            "1/2 taza de agua fría",
-            "Aceite para freír"
-        ],
-        "instructions": [
-            "En un tazón grande, combina la carne molida, la cebolla, el ajo, el pimiento, los guisantes, las pasas, el comino, el pimentón, la sal y la pimienta. Mezcla bien hasta que todos los ingredientes estén integrados.",
-            "En un tazón separado, mezcla la harina, la sal y el agua fría hasta formar una masa suave. Amasa durante unos minutos hasta que la masa esté elástica y no se pegue a tus manos.",
-            "Divide la masa en porciones pequeñas y forma bolas. Luego, estira cada bola con un rodillo hasta obtener círculos delgados.",
-            "Coloca una cucharada generosa de relleno de carne en el centro de cada círculo de masa. Humedece los bordes con un poco de agua y cierra las empanadas, sellando los bordes con un tenedor.",
-            "Calienta una sartén grande con aceite suficiente para freír. Fríe las empanadas por ambos lados hasta que estén doradas y crujientes. Retíralas y colócalas en papel absorbente para eliminar el exceso de aceite.",
-            "Sirve las empanadas calientes con tu salsa favorita o simplemente disfrútalas tal cual."
-        ],
-        "prepTimeMinutes": 30,
-        "cookTimeMinutes": 15,
-        "servings": 12,
-        "difficulty": "Intermedio",
-        "cuisine": "Latina",
-        "caloriesPerServing": 250,
-        "tags": [
-            "empanadas",
-            "carne",
-            "aperitivo",
-            "cena"
-        ],
-        "userId": null,
-        "image": "empanadas-de-carne.jpg",
-        "rating": 4.8,
-        "reviewCount": 25,
-        "mealType": [
-            "Aperitivo",
-            "Cena"
-        ],
-        "apto": []
-    }
-    
-    const aptoV =  'veggie'
-    
-    
-    const adaptarReceta = async (receta, estructura ,apto) => {
-    
-    
-        const messages = [
-            {
-                role: "system",
-                content:
-                    "Eres un asistente especializado en modificar recetas para adaptarlas a restricciones dietéticas específicas. Tu tarea es recibir una receta y adaptarla según las necesidades del usuario que pueden ser \"veggie\", \"vegan\", \"gluten-free\". Y por ultimo completar la estructura JSON que te pase el usuario con los datos de la receta, la estructura JSON tenes que mantenerla si o si, en caso de que haya campos vacios completalos y que tengan conherencia con la receta.",
-            },
-            {
-                role: "user",
-                content: `Necesito que me conviertas la siguiente receta a '${apto}'. Carga la receta en la siguiente estructura JSON: ${estructura}, mantene el mismo formato del JSON a completar.\n\nReceta:\n${receta.name}`,
-            },
-        ];
-    
-        try {
-            const response = await cohere.chat({
-                messages,
-                model: "command-r-08-2024",
-            });
-    
-            //console.log("Receta adaptada:", response.message.content[0].text);
-            // console.log("Receta adaptada:", response.message.content[0].text);
-            return response.text;
-        } catch (error) {
-            // console.error("Error durante la llamada a Cohere API:", error);
-        }
-    };
-    
-    const adaptReceta = adaptarReceta(respuestaPars, estructuraJSON, aptoV)
+ 
 
 
 

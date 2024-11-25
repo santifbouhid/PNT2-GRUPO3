@@ -1,14 +1,11 @@
 <script setup>
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-// import { library } from '@fortawesome/fontawesome-svg-core';
-// import { faKitchenSet, faUser, faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons'
 import { useCookItStore } from '../store/cookItStore';
 import { computed } from 'vue';
 import { useRouter } from 'vue-router'
 
 
 const router = useRouter()
-// library.add([faKitchenSet, faUser, faArrowRightFromBracket])
 
 const cookItStore = useCookItStore()
 const logged = computed( ()=>{
@@ -60,8 +57,10 @@ const logout = () => {
             <RouterLink to="/perfil">
               <li><a class="dropdown-item" href="#">Mi Perfil</a></li>
             </RouterLink>
-            <li><a class="dropdown-item" href="#">Mis recetas</a></li>
-            <RouterLink to="/reporte">
+            <RouterLink class="router-link nav-link " to="/misrecetas">
+              <li><a class="dropdown-item" href="#">Mis recetas</a></li>
+            </RouterLink>
+            <RouterLink class="router-link nav-link " to="/reporte">
               <li v-if="logged && isAdmin"><a class="dropdown-item" href="#">Reporte</a></li>
             </RouterLink>
             <li><a class="dropdown-item" href="#" @click="logout()">Salir <font-awesome-icon
@@ -72,12 +71,12 @@ const logout = () => {
         <div v-show="!logged">
           <ul class="navbar-nav">
             <!-- INGRESAR -->
-          <li class="nav-item">
-            <RouterLink class="nav-link router-link" to="/login">
-              Ingresar
-            </RouterLink>
-          </li>
-        </ul>
+            <li class="nav-item">
+              <RouterLink class="nav-link router-link" to="/login">
+                Ingresar
+              </RouterLink>
+            </li>
+          </ul>
         </div>
 
 
