@@ -36,8 +36,8 @@ export const usersCookITAPI = defineStore("usersStore", () => {
     const userLogged = await getUserActualizado();
     const idUser = userLogged._id
 
-    console.log('idRecetaFavorita', idRecetaFavorita);
-    console.log('idUser', idUser);
+    // console.log('idRecetaFavorita', idRecetaFavorita);
+    // console.log('idUser', idUser);
     
 
     if(idUser !== undefined) {
@@ -71,8 +71,8 @@ export const usersCookITAPI = defineStore("usersStore", () => {
   const addRecetaFavorita = async (idReceta) => {
     const userLogged = await getUserActualizado();
     const idUser = userLogged._id
-    console.log('idReceta', idReceta);
-    console.log('idUser', idUser);
+    // console.log('idReceta', idReceta);
+    // console.log('idUser', idUser);
 
     if(idUser !== undefined) {
         // `https://cookit-api.up.railway.app/users/update/removeRecetaFavorita/${idUser}`

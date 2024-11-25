@@ -5,8 +5,6 @@ import { useCookItStore } from '../store/cookItStore.js';
 const cookItStore = useCookItStore()
 const usuario = ref()
 
-console.log(usuario.name)
-
 onBeforeMount(() => {
   usuario.value = cookItStore.getUserLogged()
 })
