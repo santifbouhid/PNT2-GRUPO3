@@ -22,7 +22,6 @@ export const useCookItStore = defineStore('CookItStore',()=>{
         allRecipes.value = recipes
     }
 
-    
 
     const getAllRecipes = async () => { 
         const data = await fetch('https://cookit-api.up.railway.app/recipes/allRecipes')

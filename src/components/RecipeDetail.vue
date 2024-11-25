@@ -1,6 +1,7 @@
 <script setup>
 import {onBeforeMount, onMounted, ref} from 'vue';
 import { useRoute } from 'vue-router';
+import CorazonFav from './CorazonFav.vue';
 
 const route = useRoute();
 const recipeId = ref(route.params.id);
@@ -25,6 +26,8 @@ const traerPorID = async(id) => {
 }
 
 
+
+
 onBeforeMount(() => {
    traerPorID(recipeId.value);
 });
@@ -35,6 +38,7 @@ onBeforeMount(() => {
 
     <div class="container-lg text-center contenedor" >
         <h1>{{ recetaAMostrar.name }}</h1>
+        <CorazonFav :idReceta="recetaAMostrar._id"/>
         <!----- IMAGEN / INGREDIENTES / FICHA TÉCNICA ----->
         <div class="row my-5 px-5 align-items-center" id="objetos">
             <!-- IMAGEN -->
