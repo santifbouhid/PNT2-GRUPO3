@@ -61,6 +61,7 @@ onBeforeMount(() => {
 
   <div class="container-lg text-center contenedor">
     <h1>{{ recetaAMostrar.name }}</h1>
+    <CorazonFav :idReceta="recetaAMostrar._id" />
     <!----- IMAGEN / INGREDIENTES / FICHA TÉCNICA ----->
     <div class="row my-5 px-5 align-items-center" id="objetos">
       <!-- IMAGEN -->
@@ -78,64 +79,7 @@ onBeforeMount(() => {
               <div class="card-body">
                 <h5 class="card-title">INGREDIENTES</h5>
                 <p class="card-text" v-for="i in recetaAMostrar.ingredients">
-                  - {{ i }} </p>
-    <div class="container-lg text-center contenedor" >
-        <h1>{{ recetaAMostrar.name }}</h1>
-        <CorazonFav :idReceta="recetaAMostrar._id"/>
-        <!----- IMAGEN / INGREDIENTES / FICHA TÉCNICA ----->
-        <div class="row my-5 px-5 align-items-center" id="objetos">
-            <!-- IMAGEN -->
-            <div class="col-lg-6 col-md-12 col-sm-12 pb-3" >
-                <img v-if="recetaAMostrar.image == null" src='../assets/foto-stock.jpg' class="card-img-top" :alt="recetaAMostrar.name">
-                <img v-else :src="`${recetaAMostrar.image}`" class="img-fluid" :alt="`${recetaAMostrar.name}`"  >
-            </div>
-            <!----- INGREDIENTES / FICHA TÉCNICA ----->
-            <div class="col-lg-6 col-md-12 col-sm-12">
-                <div class="row">
-                    <!-- INGREDIENTES -->
-                    <div class="col" id="ing">
-                        <div class="card card-ing-ft">
-                            <div class="card-body">
-                                <h5 class="card-title">INGREDIENTES</h5>
-                                <p class="card-text" v-for="i in recetaAMostrar.ingredients">
-                                  - {{ i }}
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- FICHA TÉCNICA -->
-                    <div class="col" id="ficha">
-                        <div class="card card-ing-ft">
-                        <div class="card-body">
-                            <h5 class="card-title">FICHA TECNICA</h5>
-                            <p class="card-text" >
-                                <br>
-                                Minutos de preparación: {{ recetaAMostrar.prepTimeMinutes }}
-                                <br>
-                                Tiempo de cocción: {{ recetaAMostrar.cookTimeMinutes }}
-                                <br>
-                                Cantidad de porciones: {{ recetaAMostrar.servings}}
-                                <br>
-                                Dificultad: {{ recetaAMostrar.difficulty }}
-                                <br>
-                                Cocina: {{ recetaAMostrar.cuisine }}
-                                <br>
-                                Calorias por porción: {{ recetaAMostrar.caloriesPerServing }}
-                            </p>
-                        </div>
-                    </div>
-                    </div>
-
-                </div>
-                </div>
-            </div>
-        </div>
-        <div class="row g-2">
-            <div class="col" id="instrucciones">
-                <h2>INSTRUCCIONES</h2>
-                <p v-for="inst in recetaAMostrar.instructions">
-                    {{ inst }}
+                  - {{ i }}
                 </p>
               </div>
             </div>
@@ -181,6 +125,7 @@ onBeforeMount(() => {
 
       </div>
     </div>
+
     <div class="conversiones" v-if="restriccionesAPedir.length > 0">
       <p>Convertir receta a:</p>
       <select v-model="selected">
@@ -190,11 +135,8 @@ onBeforeMount(() => {
       <button @click="convertirReceta(selected)">Convertir</button>
     </div>
     <div class="recetaConvertida" v-if="convertida == true">
-
       <h1>{{ recetaConvertida.name }}</h1>
-      <!----- IMAGEN / INGREDIENTES / FICHA TÉCNICA ----->
       <div class="row my-5 px-5 align-items-center" id="objetos">
-        <!----- INGREDIENTES / FICHA TÉCNICA ----->
         <div class="col-lg-12 col-md-12 col-sm-12">
           <div class="row">
             <!-- INGREDIENTES -->
@@ -208,8 +150,6 @@ onBeforeMount(() => {
                 </div>
               </div>
             </div>
-
-            <!-- FICHA TÉCNICA -->
             <div class="col-6" id="ficha">
               <div class="card card-ing-ft">
                 <div class="card-body">
@@ -240,13 +180,10 @@ onBeforeMount(() => {
               </p>
             </div>
           </div>
-
         </div>
-      </div>
       </div>
     </div>
   </div>
-</div>
 </template>
 
 <style scoped>
