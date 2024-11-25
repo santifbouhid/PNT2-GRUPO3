@@ -13,7 +13,7 @@ const logged = computed( ()=>{
 })
 
 const isAdmin = computed(() => {
-  console.log(cookItStore.isAdmin())
+  console.log('admin logged', cookItStore.isAdmin())
   return cookItStore.isAdmin()
 })
 

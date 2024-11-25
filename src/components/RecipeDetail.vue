@@ -1,8 +1,7 @@
 <script setup>
-import { computed, onBeforeMount, onMounted, ref } from 'vue';
+import { computed, onBeforeMount, ref } from 'vue';
 import { useRoute } from 'vue-router';
 import { pedirReceta } from '../services/cohereIA.service.js';
-import { useRecetasModificadasStore } from '../store/recetasModificadasStore.js'
 import CorazonFav from './CorazonFav.vue';
 import { useCookItStore } from '../store/cookItStore.js';
 
