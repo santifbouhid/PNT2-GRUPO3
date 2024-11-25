@@ -4,7 +4,9 @@ import { useRoute } from 'vue-router';
 import { pedirReceta } from '../services/cohereIA.service.js';
 import { useRecetasModificadasStore } from '../store/recetasModificadasStore.js'
 import CorazonFav from './CorazonFav.vue';
+import { useCookItStore } from '../store/cookItStore.js';
 
+const cookItStore = useCookItStore()
 const route = useRoute();
 const recipeId = ref(route.params.id);
 const recetaAMostrar = ref()
@@ -17,7 +19,9 @@ let convertida = ref(false)
 const recetaConvertida = ref()
 // console.log(recipeId.value);
 
-
+const logged = computed( ()=>{
+  return  cookItStore.isLogged();
+})
 
 const traerPorID = async (id) => {
   try {
@@ -61,7 +65,10 @@ onBeforeMount(() => {
 
   <div class="container-lg text-center contenedor">
     <h1>{{ recetaAMostrar.name }}</h1>
-    <CorazonFav :idReceta="recetaAMostrar._id" />
+    <div v-if="logged">
+      <CorazonFav :idReceta="recetaAMostrar._id" />
+    </div>
+
     <!----- IMAGEN / INGREDIENTES / FICHA TÉCNICA ----->
     <div class="row my-5 px-5 align-items-center" id="objetos">
       <!-- IMAGEN -->

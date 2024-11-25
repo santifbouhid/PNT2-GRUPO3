@@ -199,7 +199,9 @@ const respetarRestriccion = async() => {
                     <img v-if="r.apto.includes('vegan')" src="https://static.vecteezy.com/system/resources/previews/023/959/764/non_2x/vegan-icon-logo-isolated-on-white-background-vector.jpg" alt="vegano">
                   </div>
                 </div>
-                <CorazonFav :idReceta="r._id"/>
+                <div v-if="logged">
+                  <CorazonFav :idReceta="r._id"/>
+                </div>
               </div>
             </RouterLink>
           </div>
