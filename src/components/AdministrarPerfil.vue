@@ -66,19 +66,21 @@ const mostrando = ref("");
 function mostrarSeleccion() {
   mostrando.value = paisSeleccionado.value ? `${paisSeleccionado.value.name} (${paisSeleccionado.value.prefix})` : "";
 }
+const restriccionesUser = computed(() => usuario.value.restricciones);
 
-console.log(usuario.name)
+
 
 const onCheckBoxChange = async (restriccion, evento) => {
-  let restriccionesUser = usuario.value.restricciones
+
+
   if (!evento.target.checked) {
-    restriccionesUser = restriccionesUser.filter(r => r !== restriccion);
-    console.log(restriccionesUser)
-    await cookItStore.updateUserLoggedRestricciones(usuario.value._id, restriccionesUser)
+    usuario.value.restricciones.splice(0, restriccion);
+    console.log('R1', restriccionesUser)
+    await cookItStore.updateUserLoggedRestricciones(usuario.value._id, restriccionesUser.value)
   }else if (evento.target.checked) {
-    restriccionesUser = restriccionesUser.push(restriccion);
-    console.log(restriccionesUser)
-    await cookItStore.updateUserLoggedRestricciones(usuario.value._id, restriccionesUser)
+    usuario.value.restricciones.push(restriccion);
+    console.log('R2', restriccionesUser.value)
+    await cookItStore.updateUserLoggedRestricciones(usuario.value._id, restriccionesUser.value)
   }
 }
 
@@ -99,12 +101,12 @@ onBeforeMount(() => {
     <div class="mb-3">
       <!-- RESTRICCIONES -->
       <div class="mb-3">
-        <label for="restricciones" class="form-label">Restricciones {{usuario.restricciones}}</label>
+        <label for="restricciones" class="form-label">Restricciones </label>
       </div>
 
 
       <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
-        <input type="checkbox" class="btn-check" id="btncheck1" autocomplete="off" :checked="usuario.restricciones.includes('gf' && 'gluten')" @click="onCheckBoxChange('gf', $event)">
+        <input type="checkbox" class="btn-check" id="btncheck1" autocomplete="off" :checked="usuario.restricciones.includes('gf' && 'gluten')" @click="onCheckBoxChange('gluten', $event)">
         <label class="btn btn-outline-secondary" for="btncheck1" >Sin Gluten</label>
 
 
