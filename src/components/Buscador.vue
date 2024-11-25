@@ -132,7 +132,12 @@ const contador = computed(() => {
 const respetarRestriccion = async() => {
   if(checked.value == false){
     checked.value = true
-    setRestriccionMultiple(cookItStore.getUserRestrictions())
+    let restricciones = cookItStore.getUserRestrictions()
+    const gluten = restricciones.findIndex(r => r === 'gluten')
+    if(gluten != -1) {
+      restricciones.splice(gluten,1, "gf")
+    }
+    setRestriccionMultiple(restricciones)
   } else {
     checked.value = false
     restriccion.value.splice(0, restriccion.value.length)
