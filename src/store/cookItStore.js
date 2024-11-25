@@ -38,6 +38,8 @@ export const useCookItStore = defineStore('CookItStore',()=>{
 
     const getUserLogged = () => userLogged.value;
 
+    const isAdmin = () => userLogged.value.rol === 'admin'
+    
     const getUserRestrictions = () => userLogged.value.restricciones
 
     const updateUserLoggedRestricciones = async (id, info) => {
@@ -56,6 +58,6 @@ export const useCookItStore = defineStore('CookItStore',()=>{
 
 
 
-    return { getUserLogged, logInUser, getLoggedStatus, isLogged, setAllRecipes, getAllRecipes, allRecipes, getRecipeById, recipeById, getUserRestrictions, userLogged, updateUserLoggedRestricciones}
+    return { isAdmin, getUserLogged, logInUser, getLoggedStatus, isLogged, setAllRecipes, getAllRecipes, allRecipes, getRecipeById, recipeById, getUserRestrictions, userLogged, updateUserLoggedRestricciones}
 })
 

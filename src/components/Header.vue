@@ -15,6 +15,11 @@ const logged = computed( ()=>{
   return  cookItStore.isLogged();  
 })
 
+const isAdmin = computed(() => {
+  console.log(cookItStore.isAdmin())
+  return cookItStore.isAdmin()
+})
+
 const logout = () => {
   cookItStore.logInUser(false);
   router.push("/");
@@ -56,6 +61,9 @@ const logout = () => {
               <li><a class="dropdown-item" href="#">Mi Perfil</a></li>
             </RouterLink>
             <li><a class="dropdown-item" href="#">Mis recetas</a></li>
+            <RouterLink to="/reporte">
+              <li v-if="logged && isAdmin"><a class="dropdown-item" href="#">Reporte</a></li>
+            </RouterLink>
             <li><a class="dropdown-item" href="#" @click="logout()">Salir <font-awesome-icon
                   icon="fa-solid fa-arrow-right-from-bracket" /></a></li>
           </ul>

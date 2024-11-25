@@ -66,8 +66,7 @@ const buscar = async () => {
       resultados.value = res
     }
   }
-  if (resultados.value.size === 0){
-    console.log("hola")
+  if (resultados.value.size === 0 || resultados.value.length === 0){
     resultados.value = await buscarRecetaIA()
   }
 }
@@ -77,7 +76,6 @@ const buscarRecetaIA = async() => {
   const respuesta = await pedirReceta(prompt)
   const respJson = JSON.parse(respuesta)
   respJson.image = null
-  // console.log(respJson)
   const array = []
   const nuevaReceta = await recetasStore.guardarNuevaReceta(respJson)
   if(nuevaReceta.acknowledged === true){
@@ -106,7 +104,12 @@ const setRestriccionMultiple = (rest) =>{
 }
 
 const setRestriccion = (rest) =>{
-    restriccion.value.push(rest);
+  clearRestriccion()
+  restriccion.value.push(rest);
+}
+
+const clearRestriccion = () => {
+  restriccion.value = []
 }
 
 const filtrarPorRestriccion = (array) =>{
@@ -158,7 +161,7 @@ const respetarRestriccion = async() => {
         <li>
           <hr class="dropdown-divider">
         </li>
-        <li><a class="dropdown-item" href="#" @click="setRestriccion('')">Desestimar Restricciones</a></li>
+        <li><a class="dropdown-item" href="#" @click="clearRestriccion()">Desestimar Restricciones</a></li>
       </ul>
     </div>
     <div class="respetarRest" v-if="logged">

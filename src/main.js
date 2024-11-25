@@ -19,6 +19,7 @@ import Home from './components/Home.vue'
 import Perfil from './components/Perfil.vue'
 import RecipeDetail from './components/RecipeDetail.vue'
 import MisRecetas from './components/MisRecetas.vue';
+import Reporte from './components/Reporte.vue'
 
 const routes = [
     {
@@ -40,6 +41,10 @@ const routes = [
     {
         path: '/misrecetas',
         component: MisRecetas
+    },
+    {
+        path: '/reporte',
+        component: Reporte
     }
 ]
 
