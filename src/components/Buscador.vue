@@ -49,7 +49,7 @@ const eliminarFiltros = () => {
 }
 
 const buscar = async () => {
-   if (busqueda.value == '' && restriccion.value.length === 0){
+  if (busqueda.value == '' && restriccion.value.length === 0){
     resultados.value = recetas
   } else if (busqueda.value === '' && restriccion.value.length > 0){
     resultados.value = await buscarPorRestriccion(restriccion.value)
@@ -65,8 +65,8 @@ const buscar = async () => {
       resultados.value = res
     }
   }
-
-  if (resultados.value.length === 0){
+  if (resultados.value.size === 0){
+    console.log("hola")
     resultados.value = await buscarRecetaIA()
   }
 }
@@ -231,8 +231,9 @@ const respetarRestriccion = async() => {
 
 .resultados {
   .counter {
-    margin-left: 5vw;
-    padding-top: 10px;
+    text-align: center;
+    font-weight: 600;
+    padding-top: 15px;
   }
 
   .cards{

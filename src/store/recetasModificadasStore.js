@@ -24,11 +24,40 @@ export const useRecetasModificadasStore = defineStore('recetasModificadasStore',
             await setAllRecipes();
         }
         return await allRecipes.value;
-        w
+        
+    };
+    
+    const getIdUltimaRecetaModificada = async() => {
+      if(allRecipes.value.length === 0){
+        setAllRecipes()
+      } else {
+        //const todasLasRecetas = 
+      }
+    }
+
+    const saveRecetaModificada = async(receta) => {
+      try {
+        const response = await fetch("https://67311e517aaf2a9aff0fe0e9.mockapi.io/misRecetas", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(receta),
+        });
+
+        if (!response.ok) {
+          throw new Error(`Error: ${response.status}`);
+        }
+        console.log(response)
+        // const data = await response.json();
+        // return data
+      } catch (error) {
+        console.error("Error al enviar datos:", error);
+      }
     };
     
 
-    return {getAllRecipes};
+    return {getAllRecipes, saveRecetaModificada};
   }
 );
 
