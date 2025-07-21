@@ -25,7 +25,7 @@ La IA de Cohere se encarga de:
 
 - Analizar la receta original.
 - Identificar ingredientes que no son compatibles con la preferencia elegida.
-- Sugerir reemplazos coherentes (por ejemplo: leche → bebida vegetal, huevo → sustituto vegetal, harina común → sin TACC).
+- Sugerir reemplazos coherentes.
 - Generar una versión alternativa del contenido manteniendo la coherencia y claridad.
 
 Esto permite ofrecer una **experiencia personalizada, dinámica e inteligente** sin requerir una base de datos de reemplazos fijos.
