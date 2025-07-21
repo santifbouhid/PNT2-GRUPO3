@@ -1,6 +1,6 @@
-# 🥗 RecetApp – Personalizador de Recetas según Preferencias
+# 🥗 CookIT – Personalizador de Recetas según Preferencias
 
-**RecetApp** es una aplicación web desarrollada en **Vue 3** que permite consultar recetas y personalizarlas automáticamente en función de tus preferencias alimenticias: **vegano**, **vegetariano** o **sin TACC (gluten free)**.
+**CookIT** es una aplicación web desarrollada en **Vue 3** que permite consultar recetas y personalizarlas automáticamente en función de tus preferencias alimenticias: **vegano**, **vegetariano** o **sin TACC (gluten free)**.
 
 Este proyecto fue desarrollado como trabajo práctico para la materia **Programación en nuevas tecnologías II**.
 
